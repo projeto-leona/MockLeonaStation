@@ -22,6 +22,8 @@ public class IndexController {
   
     private Result result;
     
+    public IndexController(){}    
+    
     public IndexController(Result result){
         this.result = result;        
     }    
@@ -31,7 +33,8 @@ public class IndexController {
     public void index(){ 
         
         ConfigurarServicos servServicos = new ConfigurarServicos();
-        List<br.leona.hardware.model.Servico> listHardwareServicos = servServicos.getListaServicos();
+        List<br.leona.hardware.model.Servico> listHardwareServicos = new  ArrayList<br.leona.hardware.model.Servico>();
+        listHardwareServicos = servServicos.getListaServicos();
         
         List<br.leona.station.controller.Servico> listStationServicos = new ArrayList<br.leona.station.controller.Servico>();
         
@@ -54,11 +57,19 @@ public class IndexController {
         
     } 
         
-    private static void SetListaServicos(List<br.leona.station.controller.Servico> listaServicos) {
+    public static void SetListaServicos(List<br.leona.station.controller.Servico> listaServicos) {
         
         br.leona.station.controller.ControllerServicos_Service service = new br.leona.station.controller.ControllerServicos_Service();
         br.leona.station.controller.ControllerServicos port = service.getControllerServicosPort();
         port.setListaServicos(listaServicos);
+            
+    }
+             
+    public static java.util.List<br.leona.station.controller.Servico> GetListaServicos() {
+        
+        br.leona.station.controller.ControllerServicos_Service service = new br.leona.station.controller.ControllerServicos_Service();
+        br.leona.station.controller.ControllerServicos port = service.getControllerServicosPort();
+        return port.getListaServicos();
             
     }
  
